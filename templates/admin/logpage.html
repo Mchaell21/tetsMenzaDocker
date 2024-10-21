@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+	<link rel="shortcut icon" type="image/png" href="{% static 'assets/images/Menza Travel Logo-01.png' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .login-logo {
+            max-width: 100px;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 576px) {
+            .login-form {
+                padding: 15px;
+            }
+            .login-logo {
+                max-width: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Login form -->
+        <form class="login-form card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+            <div class="text-center"> 
+                <img src="{% static 'assets/images/Menza Travel Logo-01.png' %}" alt="Menza Travel Logo" class="login-logo">
+            </div>
+            {% csrf_token %} 
+            <hr>
+            <!-- Display error/success messages -->
+            <!-- Username input field -->
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Enter username" required>
+            </div>
+            <!-- Password input field -->
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+            </div>
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

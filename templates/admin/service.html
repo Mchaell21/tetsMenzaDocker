@@ -1,0 +1,87 @@
+{% extends 'admin/home.html' %}
+{% load static %}
+
+{% block main %}
+    {% if messages %}
+    <div class="alert alert-primary" role="alert">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %} 
+    <form method="post" enctype="multipart/form-data" style="display: block; margin: 20px auto; max-width: 400px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; margin-top: 10px;">Upload</button>
+    </form>
+
+    <h2>List Gambar yang pernah diupload</h2>
+
+    {% if image_list|length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Deskripsi</th>
+                <th scope="col">Enable/Disable Image</th>
+                <th scope="col">Delete Banner</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for image in image_list %}
+                <tr id="image-row-{{ image.pk }}">
+                    <td>{{ image.title }}</td>
+                    <td>{{ image.description }}</td>
+                    <td class="checkbox-cell">
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="toggle-status" data-id="{{ image.pk }}" {% if image.is_enabled %}checked{% endif %}>
+                            <span class="checkbox-custom"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <a href="{% url 'delete_image' image.pk %}"><button class="btn btn-danger">DELETE</button></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Deskripsi</th>
+                <th scope="col">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <h3>Tidak ada DATA.</h3>
+    {% endif %}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.toggle-status').change(function() {
+                var checkbox = $(this);
+                var imageId = checkbox.data('id');
+                var isEnabled = checkbox.is(':checked');
+
+                $.ajax({
+                    url: "{% url 'toggle_image_status' 0 %}".replace('0', imageId),
+                    method: 'GET',
+                    data: {
+                        'is_enabled': isEnabled,
+                    },
+                    success: function(response) {
+                        console.log('Status updated successfully');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Failed to update status:', error);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,209 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI Bold', 'Arial Black', sans-serif;
+    font-weight: bold;
+    background-color: #ffffff;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+    padding-top: 0;
+    padding-bottom: 0;
+    text-align: center;
+}
+
+img {
+    width: 120%;
+    height: auto;
+    max-width: 100%;
+    border-radius: 0px;
+}
+
+.logo {
+    height: auto;
+    width: 100px;
+    margin: auto;
+}
+
+footer {
+    background-color: #2c2c2c;
+    color: #6c757d;
+    width: 100%;
+    text-align: center;
+    padding: 30px 0;
+    font-size: 16px;
+    margin-top: auto;
+}
+
+.fa {
+    padding: 10px;
+    font-size: 20px;
+    width: 36px;
+    text-align: center;
+    text-decoration: none;
+    margin: 6px 5px;
+    border-radius: 50%;
+}
+
+.nav-link {
+    color: #FFFFFF;
+    font-size: 18px;
+    text-align: center;
+}
+
+.nav-link:hover {
+    color: #00204A;
+}
+
+/* Contact Page Styles */
+.contact-container {
+    text-align: left;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact-form,
+.contact-info {
+    width: 45%;
+    font-size: 16px;
+}
+
+.contact-form h1,
+.contact-info h1 {
+    font-weight: bold;
+}
+
+.contact-form p,
+.contact-info p {
+    font-size: 14px;
+}
+
+.contact-form form {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.contact-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.contact-info a {
+    font-size: 18px;
+    padding: 3px 57px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.contact-info .instagram-link {
+    background-color: #0b4fe1;
+    color: white;
+}
+
+.contact-info .whatsapp-link {
+    background: none;
+    padding: 0;
+}
+
+.contact-info img {
+    max-width: 250px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-form,
+    .contact-info {
+        width: 100%;
+        text-align: center;
+    }
+
+    .contact-form {
+        margin-bottom: 20px;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Style for checkbox and custom span */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none; /* Hide default checkbox */
+}
+
+.checkbox-custom {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+    vertical-align: middle;
+    box-sizing: border-box; /* Ensure padding and border are included in width/height */
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-custom {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.checkbox-custom::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    top: 2px;
+    left: 7px;
+    transform: rotate(45deg);
+    opacity: 0;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-custom::after {
+    opacity: 1;
+}
+
+.carousel-container {
+    max-width: 600px; /* Adjust as needed */
+    margin: auto;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: 300px; /* Adjust as needed */
+    object-fit: contain; /* Ensures images fit within the container while maintaining aspect ratio */
+}
+

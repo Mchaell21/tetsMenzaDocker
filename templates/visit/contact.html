@@ -1,0 +1,37 @@
+{% extends 'visit/index.html'%}
+{% load static %}
+
+{% block main %}
+<!-- Form Kontak dan Alamat Perusahaan -->
+<br>
+    {% if messages %}
+    <div class="alert alert-primary" role="alert">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+<div class="container contact-container">
+    <div class="contact-form">
+        <h1>Hubungi Kami</h1>
+        <p>Kami siap menjawab pertanyaan Anda.</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Send Inquiry</button>
+        </form>
+    </div>
+    <div class="contact-info">
+        <h1><i class="fa-solid fa-location-dot"></i>Alamat</h1>
+        <p>Jl. Tenggilis Mejoyo Blok KK No.1, Kali Rungkut, Kec. Rungkut, Surabaya, Jawa Timur 60293</p>
+        <a href="https://www.google.com/maps/place/Jl.+Tenggilis+Mejoyo+Blok+KK+No.1,+Kali+Rungkut,+Kec.+Rungkut,+Surabaya,+Jawa+Timur+60293,@-7.3156619,112.7613226,17z/data=!3m1!4b1!4m10!1m2!2m1!1sJl.+Tenggilis+Mejoyo+Blok+KK+No.1,+Kali+Rungkut,+Kec.+Rungkut,+Surabaya,+Jawa+Timur+60293,+Indonesia!3m6!1s0x2dd7fafcd42a6f0f:0x2e5f48c049b4c6b0!8m2!3d-7.3156672!4d112.7661882!15sCmRKbC4gVGVuZ2dpbGlzIE1lam95byBCbG9rIEtLIE5vLjEsIEthbGkgUnVuZ2t1dCwgS2VjLiBSdW5na3V0LCBTdXJhYmF5YSwgSmF3YSBUaW11ciA2MDI5MywgSW5kb25lc2lhkgERY29tcG91bmRfYnVpbGRpbmfgAQA!16s%2Fg%2F11bw40ndfl?hl=en&entry=ttu" target="_blank">View maps</a>
+        <br><br>
+        <h1><i class="fa-solid fa-location-dot"></i>Our Social Media</h1>
+        <br>
+        <a href="https://wa.me/+62881012237888" target="_blank" class="whatsapp-link"><img src="{% static 'assets/images/WhatsAppButtonGreenMedium.png' %}" alt="Menza Travel Logo"></a>
+        <br><br>
+        <a href="https://www.instagram.com/menzatravel?igsh=b2l6aXFqc2M5NDhh" target="_blank" class="instagram-link"><i class="fa fa-instagram"></i> Instagram</a>
+    </div>
+</div>
+<br>
+{% endblock %}

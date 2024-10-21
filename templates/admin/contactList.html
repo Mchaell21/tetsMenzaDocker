@@ -1,0 +1,50 @@
+{% extends 'admin/home.html' %}
+{% load static %}
+
+{% block main %}
+    {% if messages %}
+        <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+<div class="container">
+    <h2>List inquiries</h2>
+
+    {% if contactList|length > 0 %}
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Date Added</th>
+                    <th scope="col">Company Name</th>
+                    <th scope="col">Email Address</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Delete Inquiry</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contactList %}
+                    <tr>
+                        <td>{{ contact.dateCreated }}</td>
+                        <td>{{ contact.contactName }}</td>
+                        <td>{{ contact.contactEmail }}</td>
+                        <td>{{ contact.contactPhone }}</td>
+                        <td>{{ contact.contactNote }}</td>
+                        <td>
+                            <a href="{% url 'deleteContact' contact.slug %}">
+                                <button class="btn btn-danger btn-sm">DELETE</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <h3>nobody is asking any question yet.</h3>
+    {% endif %}
+</div>
+{% endblock %}

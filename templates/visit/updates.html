@@ -1,0 +1,83 @@
+{% extends 'visit/index.html' %}
+{% load static %}
+
+{% block main %}
+<div class="row row-cols-1 row-cols-md-3">
+    {% for post in posts %}
+    <div class="col mb-4">
+        <div class="card">
+            <div class="view overlay">
+                {% if post.images.count > 1 %}
+                <!-- Carousel for multiple images -->
+                <div id="carousel{{ forloop.counter0 }}" class="carousel slide" data-bs-ride="false"> <!-- Changed to false -->
+                    <!-- Indicators -->
+                    <div class="carousel-indicators">
+                        {% for image in post.images.all %}
+                        <button type="button" data-bs-target="#carousel{{ forloop.parentloop.counter0 }}" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %} active {% endif %}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Slide {{ forloop.counter0 }}"></button>
+                        {% endfor %}
+                    </div>
+                    <!-- Slides -->
+                    <div class="carousel-inner">
+                        {% for image in post.images.all %}
+                        <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                            {% if image.images.url %}
+                            <img src="{{ image.images.url }}" class="d-block w-100" style="max-height: 100%; width: auto; object-fit: contain;" alt="Post image">
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Controls -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ forloop.counter0 }}" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ forloop.counter0 }}" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                {% else %}
+                <!-- Single image -->
+                {% if post.images.first %}
+                <img class="card-img-top" src="{{ post.images.first.images.url }}" alt="Post image" style="max-height: 100%; width: auto; object-fit: contain;">
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+<style>
+@media (max-width: 768px) {
+    .row-cols-1 > .col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+.card {
+    max-width: 1080px;
+    margin: 0 auto; 
+    height: 1080px; 
+}
+
+.card-img-top, .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+}
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var carousels = document.querySelectorAll('.carousel');
+        carousels.forEach(function(carousel) {
+            new bootstrap.Carousel(carousel, {
+                interval: false,
+                wrap: true
+            });
+        });
+    });
+</script>

@@ -1,0 +1,45 @@
+{% extends 'admin/home.html' %}
+{% load static %}
+
+{% block main %}
+<div class="container">
+    <h2>List inquiries</h2>
+        {% if messages %}
+        <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% if posts|length > 0 %}
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Delete Post</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                <tr>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.description }}</td>
+                    <td>
+                        <form action="{% url 'delete_post' post.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">DELETE</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <h3>No post yet.</h3>
+    {% endif %}
+</div>
+
+{% endblock %}
